@@ -16,7 +16,7 @@ public class PuntajesComputadoraOJugador extends JFrame {
 	
 	/*!
 	 * @brief Construye una instancia del menu.
-	 * Añade los botones para elegir si ver puntajes de computadora o 
+	 * Anade los botones para elegir si ver puntajes de computadora o 
 	 * 2 jugadores
 	 */
 

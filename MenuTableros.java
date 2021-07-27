@@ -23,7 +23,7 @@ public class MenuTableros extends JFrame{
 	/*!
 	 * @brief Construye una instancia de la Interfaz
 	 * @param Recibe booleano que indica si se juega o no contra la computadora. 
-	 * Ademas pone los botones delos tableros, salir y volver al menu.
+	 * Ademas pone los botones de los tableros, salir y volver al menu.
 	 */
 	public MenuTableros(boolean c) {
 		super("Othello");

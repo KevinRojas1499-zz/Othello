@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 /*!
  * @brief La clase del menu principal es la que contiene el main 
- * Esta cuenta con las opciones para jugar dso jugadores o solo 
+ * Esta cuenta con las opciones para jugar dos jugadores o solo 
  * contra la computadora. Tambien tiene la opcion de entrar a los puntajes
  * y salir del juego.
  */
@@ -26,12 +26,9 @@ public class MenuPrincipal extends JFrame{
 	
 	public MenuPrincipal() {
 		super("Othello");
+		
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(4,1));
-		this.setLayout(null);
-		setSize(ANCHO,LARGO);
-		setVisible(true);
-		setResizable(false);
 		Jugador1 = new JButton("1 Jugador");
 		panel.add(Jugador1);
 		Jugador2 = new JButton("2 Jugadores");
@@ -40,9 +37,15 @@ public class MenuPrincipal extends JFrame{
 		panel.add(Puntajes);
 		salir = new JButton("Salir");
 		panel.add(salir);
-		
-		this.add(panel);
 		panel.setBounds(270,300,125,100);
+
+		this.setLayout(null);
+		this.setSize(ANCHO,LARGO);
+		this.setVisible(true);
+		this.setResizable(false);
+		
+
+		this.add(panel);
 		ManejadorBoton manejador = new ManejadorBoton();
 		Jugador1.addActionListener(manejador);
 		Jugador2.addActionListener(manejador);

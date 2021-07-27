@@ -186,15 +186,12 @@ public class Tablero{
 			throw new IllegalArgumentException("La columna esta fuera de los limites del tablero.");
 		
 		boolean puede = false;
+		int[] dirX = {0,-1,-1,-1, 0, 1, 1,1};
+		int[] dirY = {1, 1, 0,-1,-1,-1, 0,1};
 		if(fichas[fila][columna]==VACIO){
-			puede |= puedeComerDireccion(color, fila, columna, 0, 1);
-			puede |= puedeComerDireccion(color, fila, columna, -1, 1);
-			puede |= puedeComerDireccion(color, fila, columna, -1, 0);
-			puede |= puedeComerDireccion(color, fila, columna, -1, -1);
-			puede |= puedeComerDireccion(color, fila, columna, 0, -1);
-			puede |= puedeComerDireccion(color, fila, columna, 1, -1);
-			puede |= puedeComerDireccion(color, fila, columna, 1, 0);
-			puede |= puedeComerDireccion(color, fila, columna, 1, 1);
+			for(int i = 0; i<8; i++){
+				puede|= puedeComerDireccion(color,fila,columna,dirX[i],dirY[i]);
+			}
 		}
 		return puede;
 	}
@@ -220,7 +217,7 @@ public class Tablero{
 		
 		for(int i = 0; i < tamano && !existen; i++){
 			for(int j = 0; j < tamano && !existen; j++){
-				existen = puedePoner(color,i,j);
+				existen |= puedePoner(color,i,j);
 			}
 		}
 		
@@ -274,39 +271,15 @@ public class Tablero{
 		
 		boolean pudoPoner = false;
 		
-		if(puedeComerDireccion(color, fila, columna, 0, 1)){
-			comerDireccion(color, fila, columna, 0, 1);
-			pudoPoner = true;
+		int[] dirX = {0,-1,-1,-1, 0, 1, 1,1};
+		int[] dirY = {1, 1, 0,-1,-1,-1, 0,1};
+		for(int i = 0; i<8; i++){
+			if(puedeComerDireccion(color,fila,columna,dirX[i],dirY[i])){
+				comerDireccion(color,fila,columna,dirX[i],dirY[i]);
+				pudoPoner = true;
+			}
+
 		}
-		if(puedeComerDireccion(color, fila, columna, -1, 1)){
-			comerDireccion(color, fila, columna, -1, 1);
-			pudoPoner = true;
-		}
-		if(puedeComerDireccion(color, fila, columna, -1, 0)){
-			comerDireccion(color, fila, columna, -1, 0);
-			pudoPoner = true;
-		}
-		if(puedeComerDireccion(color, fila, columna, -1, -1)){
-			comerDireccion(color, fila, columna, -1, -1);
-			pudoPoner = true;
-		}
-		if(puedeComerDireccion(color, fila, columna, 0, -1)){
-			comerDireccion(color, fila, columna, 0, -1);
-			pudoPoner = true;
-		}
-		if(puedeComerDireccion(color, fila, columna, 1, -1)){
-			comerDireccion(color, fila, columna, 1, -1);
-			pudoPoner = true;
-		}
-		if(puedeComerDireccion(color, fila, columna, 1, 0)){
-			comerDireccion(color, fila, columna, 1, 0);
-			pudoPoner = true;
-		}
-		if(puedeComerDireccion(color, fila, columna, 1, 1)){
-			comerDireccion(color, fila, columna, 1, 1);
-			pudoPoner = true;
-		}
-		
 		if(pudoPoner){
 			fichas[fila][columna] = color;
 		}

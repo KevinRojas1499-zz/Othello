@@ -45,21 +45,24 @@ public class InterfazGrafica  extends JFrame {
 			CASILLA = 35;
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2,1));
-		this.setLayout(null);
-		setSize(ANCHO,LARGO);
-		setVisible(true);
-		setResizable(false);
-		this.tablero = t;
 		menu = new JButton("Menu");
 		panel.add(menu);
 		salir = new JButton("Salir");
 		panel.add(salir);
 		this.add(panel);
 		panel.setBounds(520,400,75,50);
+		
+
+		this.setLayout(null);
+		this.setSize(ANCHO,LARGO);
+		this.setVisible(true);
+		this.setResizable(false);
+		this.tablero = t;
+		
 		ManejadorBoton manejador = new ManejadorBoton();
 		menu.addActionListener(manejador);
 		salir.addActionListener(manejador);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addMouseListener(new MouseInput(t,CASILLA));
 		computadora = c;
 		AI = new Computadora(t, 1, -1);
@@ -160,8 +163,11 @@ public class InterfazGrafica  extends JFrame {
 			int mx  =  ((e.getX()-65)/CASILLA);
 			int my  =  ((e.getY()-150)/CASILLA);
 			
+
+
 			if (!computadora) {
-				if(!(tablero.existenJugadas(1)&&tablero.existenJugadas(-1))) {
+				if(!tablero.existenJugadas(1)&& !tablero.existenJugadas(-1)) {
+					//Final del juego ninguno tiene jugadas
 					ControladorPuntajes puntajes = new ControladorPuntajes(""+tablero.getTamano()+"Jugador");
 					int maximo  = Math.max(tablero.cantidadBlancas(), tablero.cantidadNegras());
 					
@@ -186,7 +192,8 @@ public class InterfazGrafica  extends JFrame {
 				}
 			}
 			else {
-				if(!(tablero.existenJugadas(1)&&tablero.existenJugadas(-1))) {
+				if(!tablero.existenJugadas(1) && !tablero.existenJugadas(-1)) {
+					//Final del juego, ninguno tiene jugadas
 					ControladorPuntajes puntajes = new ControladorPuntajes(""+tablero.getTamano()+"Computadora");
 					
 					if (tablero.cantidadBlancas()<tablero.cantidadNegras() && tablero.cantidadNegras() > puntajes.getMinimo() ) {
@@ -211,7 +218,7 @@ public class InterfazGrafica  extends JFrame {
 			}
 			
 
-			
+
 			if(0 <= mx && mx<tablero.getTamano() && 0 <= my && my<tablero.getTamano()) {
 				if(tablero.puedePoner(jugadorActual, mx, my)) {
 					if (!computadora){						
